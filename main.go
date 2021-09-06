@@ -2,11 +2,13 @@ package main
 
 import (
 	"bufio"
+	"github.com/cyrildever/feistel"
 	"log"
 	"os"
 )
 
 func readTxt(name string) []string{
+	//Function read a txt file and return a string list
 	file, err := os.Open(name)
 	if err != nil {
 		log.Fatalf("error opening file: %s", err)
@@ -23,9 +25,17 @@ func readTxt(name string) []string{
 	return txtlines
 }
 
+
+//We going to cipher the message with Feistel cipher permutation
+
 func main(){
+
+	//Exampling reading file
 	file:=readTxt("mensajedeentrada.txt")
-	for _, line := range file {
-		print(line)
-	}
+	println(file[0])
+
+	cipher := feistel.NewCipher("some-32-byte-long-key-to-be-safe", 10)
+
+
+
 }
