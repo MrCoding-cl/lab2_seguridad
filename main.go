@@ -2,7 +2,8 @@ package main
 
 import (
 	"bufio"
-	"github.com/cyrildever/feistel"
+	"crypto/sha1"
+	"fmt"
 	"log"
 	"os"
 )
@@ -26,15 +27,22 @@ func readTxt(name string) []string{
 }
 
 
+
+
+
 //We going to cipher the message with Feistel cipher permutation
 
 func main(){
 
 	//Exampling reading file
-	file:=readTxt("mensajedeentrada.txt")
+	file:=readTxt("mensajedeentrada.txt") //read the text
+	hash := sha1.New()//generate the sha1
+	hash.Write([]byte(file[0]))//using the sha1 function
+	bs := hash.Sum(nil)
 	println(file[0])
+	println(bs)
+	fmt.Printf("%x\n", bs)
 
-	cipher := feistel.NewCipher("some-32-byte-long-key-to-be-safe", 10)
 
 
 
